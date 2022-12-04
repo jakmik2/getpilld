@@ -1,8 +1,0 @@
-[gd_resource type="NativeScript" load_steps=2 format=2]
-
-[ext_resource path="res://bin/_X_LIBRARY_X_" type="GDNativeLibrary" id=1]
-
-[resource]
-resource_name = "_X_CLASS_X_"
-class_name = "_X_CLASS_X_"
-library = ExtResource( 1 )
