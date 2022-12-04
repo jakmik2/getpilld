@@ -1,3 +1,7 @@
+# Get Pilld
+
+Use godot v 3.4.2 on windows.
+
 # SET UP
 
 clone repo
