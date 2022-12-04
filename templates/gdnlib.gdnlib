@@ -1,0 +1,14 @@
+[entry]
+
+Windows.64="res://src/target/debug/_X_PATH_X_.dll"
+
+[dependencies]
+
+Windows.64=[  ]
+
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
