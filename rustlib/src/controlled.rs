@@ -1,3 +1,5 @@
+use crate::projectile::*;
+
 use gdnative::api::*;
 use gdnative::prelude::*;
 
@@ -5,19 +7,12 @@ use gdnative::prelude::*;
 
 #[derive(gdnative::derive::NativeClass)]
 #[inherit(KinematicBody2D)]
-struct Controlled {
-    projectile_scene: Ref<PackedScene, Shared>
+pub struct Controlled {
 }
 
 impl Controlled {
     fn new(_owner: &KinematicBody2D) -> Self {
-        Controlled {
-            projectile_scene: ResourceLoader::godot_singleton()
-                                .load("res://prefabs/Projectile.tscn", "PackedScene", false)
-                                .unwrap()
-                                .cast::<PackedScene>()
-                                .unwrap()
-        }
+        Controlled {}
     }
 }
 
@@ -31,28 +26,17 @@ impl Controlled {
     #[method]
     fn _process(&self, #[base] owner: &KinematicBody2D, _delta: f32) {
         let input: &Input = Input::godot_singleton();
-        let shoot = input.get_action_strength("shoot", false) != 0.0;
 
-        if shoot {
-            let projectile_scene = unsafe {
-                self.projectile_scene.assume_safe()
-            };
+        // this should be managed by a skills / skill manager instance
+        if input.get_action_strength("shoot", false) != 0.0
+        {
+            let direction: Vector2 = owner.get_local_mouse_position();            
 
-            let projectile_node = projectile_scene.instance(0).unwrap();
+            let proj_sprite_path: &str = "res://sprites/icon.png";
 
-            let projectile = unsafe {
-                projectile_node.assume_unique().cast::<KinematicBody2D>().unwrap()
-            };
-            
-            projectile.set_position(Vector2::new(owner.position().x + 10.0, owner.position().y));
+            let projectile: Projectile = Projectile::at(owner, direction);
 
-            unsafe {
-                owner
-                .get_parent()
-                .unwrap()
-                .assume_safe()
-                .add_child(projectile, false);
-            }
+            projectile.shoot(owner, proj_sprite_path);
         }
     }
 
@@ -72,9 +56,3 @@ impl Controlled {
 		owner.move_and_collide(velocity, true, true, false);
     }
 }
-
-fn init(handle: InitHandle) {
-    handle.add_class::<Controlled>();
-}
-
-godot_init!(init);
