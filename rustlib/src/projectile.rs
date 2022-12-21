@@ -27,21 +27,6 @@ impl Projectile {
     }
     
     pub fn shoot(owner: &KinematicBody2D, proj_sprite_path: &str, angle: f64) {
-        let sprite = unsafe {
-            owner.get_child(0)
-                .unwrap()
-                .assume_safe()
-                .cast::<Sprite>()
-                .unwrap()
-        };
-
-        sprite.set_texture(
-            ResourceLoader::godot_singleton()
-                .load(proj_sprite_path, "Texture", false)
-                .unwrap()
-                .cast::<Texture>()
-                .unwrap()
-        );
 
         let process_scene: Ref<PackedScene, Shared> = ResourceLoader::godot_singleton()
                                                                         .load(Projectile::PROJECTILE_SCENE, "PackedScene", false)
@@ -64,6 +49,23 @@ impl Projectile {
 
         // Set direction of projectile
         projectile.rotate(-1.0 * angle - (PI / 3.0) as f64);
+
+        // Set Sprite
+        let sprite = unsafe {
+            projectile.get_child(0)
+                .unwrap()
+                .assume_safe()
+                .cast::<Sprite>()
+                .unwrap()
+        };
+
+        sprite.set_texture(
+            ResourceLoader::godot_singleton()
+                .load(proj_sprite_path, "Texture", false)
+                .unwrap()
+                .cast::<Texture>()
+                .unwrap()
+        );
 
         unsafe {
             owner

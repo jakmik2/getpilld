@@ -29,7 +29,7 @@ impl Controlled {
 
             let angle: f64 = owner.get_local_mouse_position().angle_to_point(owner.position()) as f64;            
 
-            let proj_sprite_path: &str = "res://sprites/icon.png";
+            let proj_sprite_path: &str = "res://sprites/bullet.png";
 
             Projectile::shoot(owner, proj_sprite_path, angle);
         }
