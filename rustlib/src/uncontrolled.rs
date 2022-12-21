@@ -1,11 +1,9 @@
-use gdnative::api::Sprite;
+use gdnative::api::*;
 use gdnative::prelude::*;
-
-// use gdnative::export::hint::{EnumHint, IntHint, StringHint};
 
 #[derive(gdnative::derive::NativeClass)]
 #[inherit(Sprite)]
-struct Uncontrolled {
+pub struct Uncontrolled {
 
 }
 
@@ -30,9 +28,3 @@ impl Uncontrolled {
         owner.set_position(pos);
     }
 }
-
-fn init(handle: InitHandle) {
-    handle.add_class::<Uncontrolled>();
-}
-
-godot_init!(init);
