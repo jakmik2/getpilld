@@ -37,5 +37,4 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "Idle"
-frame = 2
 playing = true
