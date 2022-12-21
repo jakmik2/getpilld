@@ -18,11 +18,6 @@ impl Controlled {
 
 #[methods]
 impl Controlled {
-    // #[method]
-    // fn _ready(&mut self, #[base] owner: &KinematicBody2D) {
-    //     owner.set_physics_process(true);
-    // }
-
     #[method]
     fn _process(&self, #[base] owner: &KinematicBody2D, _delta: f32) {
         let input: &Input = Input::godot_singleton();
@@ -30,13 +25,13 @@ impl Controlled {
         // this should be managed by a skills / skill manager instance
         if input.get_action_strength("shoot", false) != 0.0
         {
-            let direction: Vector2 = owner.get_local_mouse_position();            
+            // TODO: This will be delegated to a skill
+
+            let angle: f64 = owner.get_local_mouse_position().angle_to_point(owner.position()) as f64;            
 
             let proj_sprite_path: &str = "res://sprites/icon.png";
 
-            let projectile: Projectile = Projectile::at(owner, direction);
-
-            projectile.shoot(owner, proj_sprite_path);
+            Projectile::shoot(owner, proj_sprite_path, angle);
         }
     }
 
