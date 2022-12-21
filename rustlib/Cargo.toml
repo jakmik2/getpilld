@@ -1,5 +1,5 @@
 [package]
-name = "controlled"
+name = "rustlib"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,3 +10,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gdnative = "0.10"
+
+[workspace]
