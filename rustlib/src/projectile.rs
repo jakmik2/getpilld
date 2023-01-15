@@ -14,9 +14,9 @@ pub struct Projectile {
 }
 
 impl Projectile {
-    const PROJECTILE_SCENE: &str = "res://prefabs/Projectile.tscn";
-    
-    fn new(_owner: &KinematicBody2D) -> Self {        
+    fn new(_owner: &KinematicBody2D) -> Self {
+        godot_print!("New");
+
         Projectile {
             acceleration: 5.0,
             max_speed: 25.0,
@@ -27,28 +27,14 @@ impl Projectile {
     }
     
     pub fn shoot(owner: &KinematicBody2D, proj_sprite_path: &str, angle: f64) {
-        let sprite = unsafe {
-            owner.get_child(0)
-                .unwrap()
-                .assume_safe()
-                .cast::<Sprite>()
-                .unwrap()
-        };
-
-        sprite.set_texture(
-            ResourceLoader::godot_singleton()
-                .load(proj_sprite_path, "Texture", false)
-                .unwrap()
-                .cast::<Texture>()
-                .unwrap()
-        );
 
         let process_scene: Ref<PackedScene, Shared> = ResourceLoader::godot_singleton()
-                                                                        .load(Projectile::PROJECTILE_SCENE, "PackedScene", false)
+                                                                        .load("res://prefabs/Projectile.tscn", "PackedScene", false)
                                                                         .unwrap()
                                                                         .cast::<PackedScene>()
                                                                         .unwrap();
 
+        godot_print!("process scene");
 
         let projectile_scene: TRef<PackedScene> = unsafe {
             process_scene.assume_safe()
@@ -56,9 +42,13 @@ impl Projectile {
 
         let projectile_node: Ref<Node> = projectile_scene.instance(0).unwrap();
 
+        godot_print!("Instance / unwrap");
+
         let projectile: Ref<KinematicBody2D, Unique> = unsafe {
             projectile_node.assume_unique().cast::<KinematicBody2D>().unwrap()
         };
+
+        godot_print!("Cast kinematicBody2D");
 
         projectile.set_position(owner.position());
 
@@ -71,7 +61,7 @@ impl Projectile {
                 .unwrap()
                 .assume_safe()
                 .add_child(projectile, false)
-        }
+        };
     }
 }
 
