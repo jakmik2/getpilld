@@ -1,4 +1,5 @@
 use crate::projectile::*;
+use crate::ecs;
 
 use gdnative::api::*;
 use gdnative::prelude::*;

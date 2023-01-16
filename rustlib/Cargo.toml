@@ -11,5 +11,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 gdnative = "0.10"
-
-[workspace]
+bevy_ecs = "0.8.1"

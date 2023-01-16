@@ -1,6 +1,6 @@
 #!/bin/bash
-gdlibrary=$1
-class_name=$2
+class_name=$1
+gdlibrary="rustlib"
 
 # Make template in scripts
 cp "$PWD/templates/gdns.gdns" "$PWD/scripts/$class_name.gdns"
