@@ -7,8 +7,12 @@ reloadable=true
 
 [entry]
 
+OSX.64="res://rustlib/target/debug/librustlib.dylib"
 Windows.64="res://rustlib/target/debug/rustlib.dll"
+iOS.arm64="res://rustlib/target/debug/librustlib.dylib"
 
 [dependencies]
 
+OSX.64=[  ]
 Windows.64=[  ]
+iOS.arm64=[  ]
