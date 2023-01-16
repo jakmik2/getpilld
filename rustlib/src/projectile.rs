@@ -15,8 +15,6 @@ pub struct Projectile {
 
 impl Projectile {
     fn new(_owner: &KinematicBody2D) -> Self {
-        godot_print!("New");
-
         Projectile {
             acceleration: 5.0,
             max_speed: 25.0,
@@ -45,7 +43,7 @@ impl Projectile {
         };
 
         projectile.set_position(owner.position());
-        
+
         // Set direction of projectile
         projectile.rotate(-1.0 * angle - (PI / 3.0) as f64);
 
