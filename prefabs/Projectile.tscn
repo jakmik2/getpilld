@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Projectile.gdns" type="Script" id=1]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Bullet.png" type="Texture" id=2]
 
 [node name="Projectile" type="KinematicBody2D"]
 position = Vector2( 72, 43 )
@@ -11,5 +11,4 @@ __meta__ = {
 }
 
 [node name="ProjectileSprite" type="Sprite" parent="."]
-scale = Vector2( 0.046875, 0.046875 )
 texture = ExtResource( 2 )
