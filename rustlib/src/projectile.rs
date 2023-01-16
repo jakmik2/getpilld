@@ -34,21 +34,15 @@ impl Projectile {
                                                                         .cast::<PackedScene>()
                                                                         .unwrap();
 
-        godot_print!("process scene");
-
         let projectile_scene: TRef<PackedScene> = unsafe {
             process_scene.assume_safe()
         };
 
         let projectile_node: Ref<Node> = projectile_scene.instance(0).unwrap();
 
-        godot_print!("Instance / unwrap");
-
         let projectile: Ref<KinematicBody2D, Unique> = unsafe {
             projectile_node.assume_unique().cast::<KinematicBody2D>().unwrap()
         };
-
-        godot_print!("Cast kinematicBody2D");
 
         projectile.set_position(owner.position());
 
