@@ -1,15 +1,11 @@
-use std::f32::consts::PI;
-
 use gdnative::api::*;
 use gdnative::prelude::*;
 
-#[derive(gdnative::derive::NativeClass)]
+#[derive(NativeClass)]
 #[inherit(KinematicBody2D)]
 pub struct Projectile {
     acceleration: f32,
     max_speed: f32,
-    rotation: f64,
-    timer: f32,
     existence: f32
 }
 
@@ -18,8 +14,6 @@ impl Projectile {
         Projectile {
             acceleration: 5.0,
             max_speed: 25.0,
-            rotation: 0.1, // radians / sec,
-            timer: 0.0,
             existence: 2.0
         }
     }
@@ -45,7 +39,7 @@ impl Projectile {
         projectile.set_position(owner.position());
 
         // Set direction of projectile
-        projectile.rotate(-1.0 * angle - (PI / 3.0) as f64);
+        projectile.rotate(angle);
 
         // Set Sprite
         let sprite = unsafe {
@@ -91,16 +85,16 @@ impl Projectile {
     #[method]
     fn _physics_process(&mut self, #[base] owner: &KinematicBody2D, delta: f32) {
         // Apply rotation
-        owner.rotate(self.rotation);
+        // owner.rotate(self.rotation);
 
         // Progress timer
-        self.timer += delta;
+        // self.timer += delta;
 
         // TODO: Optional, should be implemented in skills 
-        if self.timer >= 0.1 {
-            self.timer = 0.0;
-            self.rotation -= 0.02;
-        }
+        // if self.timer >= 0.1 {
+        //     self.timer = 0.0;
+        //     self.rotation -= 0.02;
+        // }
 
         // TODO: Implement collision return and collision function
         owner.move_and_collide(owner.get_transform().a * self.max_speed * self.acceleration * delta, true, true, false);

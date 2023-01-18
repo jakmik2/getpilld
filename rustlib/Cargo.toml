@@ -10,6 +10,6 @@ rust-version = "1.65"
 crate-type = ["cdylib"]
 
 [dependencies]
-gdnative = "0.10"
+gdnative = "0.10.2"
 
 [workspace]
