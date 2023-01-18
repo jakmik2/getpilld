@@ -4,22 +4,26 @@ use crate::skills::*;
 
 
 pub struct SkillSystem {
-    skills: Vec<Box<dyn CanShoot>>,
+    skills: Vec<Box<dyn Skill>>,
     timers: Vec<f32>
 }
 
 impl SkillSystem {
     pub fn new() -> Self {
-        let mut v: Vec<Box<dyn CanShoot>> = Vec::new();
-        v.push(Box::new(TestSkill::new()));
+        let mut sksys = SkillSystem {
+            skills: Vec::new(),
+            timers: Vec::new()
+        };
 
-        let mut t: Vec<f32> = Vec::new();
-        t.push(0.0);
+        // Add Skills
+        sksys.add_skill(Box::new(TestSkill::new()));
 
-        SkillSystem {
-            skills: v,
-            timers: t
-        }
+        sksys
+    }
+
+    fn add_skill(&mut self, skill: Box<dyn Skill>) -> () {
+        self.skills.push(skill);
+        self.timers.push(0.0);
     }
 }
 

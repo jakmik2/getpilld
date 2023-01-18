@@ -3,7 +3,7 @@ use std::f64::consts::PI;
 use gdnative::prelude::*;
 use crate::projectile::Projectile;
 
-pub trait CanShoot {
+pub trait Skill {
     fn get_image(&self) -> &str;
     fn activate(&self, owner: &KinematicBody2D, timer: f32) -> bool;
 }
@@ -22,7 +22,7 @@ impl TestSkill {
     }
 }
 
-impl CanShoot for TestSkill {
+impl Skill for TestSkill {
     fn get_image(&self) -> &str {
         &self.bullet_image.as_str()
     }
