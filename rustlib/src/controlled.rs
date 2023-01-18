@@ -1,6 +1,4 @@
-use crate::projectile::*;
 use crate::skill_system::*;
-use crate::skills::*;
 
 use gdnative::api::*;
 use gdnative::prelude::*;
@@ -10,15 +8,13 @@ use gdnative::prelude::*;
 #[derive(NativeClass)]
 #[inherit(KinematicBody2D)]
 pub struct Controlled {
-    skills: SkillSystem,
-    timer: f32
+    skills: SkillSystem
 }
 
 impl Controlled {
     fn new(_owner: &KinematicBody2D) -> Self {
         Controlled {
-            skills: SkillSystem::default(),
-            timer: 0.0
+            skills: SkillSystem::new()
         }
     }
 }
@@ -28,11 +24,7 @@ impl Controlled {
     #[method]
     fn _process(&mut self, #[base] owner: &KinematicBody2D, delta: f32) {
         // let input: &Input = Input::godot_singleton();
-        self.timer += delta;
-        if self.timer >= 1.0 {
-            self.skills.activate(owner);
-            self.timer = 0.0;
-        }
+        self.skills.activate(owner, delta);
 
 
         // this should be managed by a skills / skill manager instance

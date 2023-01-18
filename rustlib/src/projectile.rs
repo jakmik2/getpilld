@@ -18,7 +18,7 @@ impl Projectile {
         }
     }
     
-    pub fn shoot(owner: &KinematicBody2D, proj_sprite_path: &str) {
+    pub fn shoot(owner: &KinematicBody2D, proj_sprite_path: &str, angle: f64) {
 
         let process_scene: Ref<PackedScene, Shared> = ResourceLoader::godot_singleton()
                                                                         .load("res://prefabs/Projectile.tscn", "PackedScene", false)
@@ -39,7 +39,7 @@ impl Projectile {
         projectile.set_position(owner.position());
 
         // Set direction of projectile
-        // projectile.rotate(-1.0 * angle - (PI / 3.0) as f64);
+        projectile.rotate(angle);
 
         // Set Sprite
         let sprite = unsafe {
