@@ -15,7 +15,6 @@ impl SkillSystem {
             timers: Vec::new()
         };
 
-        // Add Skills
         sksys.add_skill(Box::new(TestSkill::new()));
 
         sksys
@@ -33,8 +32,7 @@ impl SkillSystem {
         self.update_time(delta);
 
         for (idx, skill) in self.skills.iter().enumerate() {
-            let activated = skill.activate(owner, self.timers[idx]);
-            if activated {
+            if skill.activate(owner, self.timers[idx]) {
                 self.timers[idx] = 0.0
             }
         }
