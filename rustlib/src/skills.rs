@@ -1,7 +1,7 @@
-use std::f64::consts::PI;
-
 use gdnative::prelude::*;
+
 use crate::projectile::Projectile;
+use crate::constants::*;
 
 pub trait Skill {
     fn get_image(&self) -> &str;
