@@ -28,3 +28,7 @@ impl Uncontrolled {
         owner.set_position(pos);
     }
 }
+
+pub trait Scrolling {
+    fn movement(&self) -> ();
+}
